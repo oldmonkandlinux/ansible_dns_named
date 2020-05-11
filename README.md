@@ -1,4 +1,4 @@
-Role Name
+DNS
 =========
 
 A simple role to setup "bind" dns server.
