@@ -1,0 +1,11 @@
+---
+# vars file for dns
+packages:
+  - bind
+  - bind-utils
+network: '192.168.122.0/24'
+service: named
+domain: example.com
+user: root
+dummy: node11
+dummy_ip: 10.0.0.1

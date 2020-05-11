@@ -1,0 +1,11 @@
+$TTL 3H
+$ORIGIN {{ domain }}.
+{{ domain }}.	IN SOA	{{ ansible_hostname }}.{{ domain }}. {{ user }}.{{ domain }}. (
+					1	; serial
+					1D	; refresh
+					1H	; retry
+					1W	; expire
+					3H )	; minimum
+{{ domain }}.	NS	{{ ansible_hostname }}.{{ domain }}.
+{{ ansible_hostname }}		A	{{ ansible_default_ipv4.address }}
+{{ dummy }}		A	{{ dummy_ip }}

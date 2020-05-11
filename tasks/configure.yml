@@ -1,0 +1,37 @@
+---
+- name: copy basic config file
+  template:
+   src: named.conf.basic.j2
+   dest: /etc/named.conf
+   owner: root
+   group: named
+   mode: '0640'
+   backup: yes
+- name: check config file
+  shell: /usr/sbin/named-checkconf
+  register: result
+- name: check if checkconf ran fine
+  debug:
+   msg: "checkconf ran fine" 
+  when: result.rc == 0
+- name: configure forward zone
+  template:
+   src: example.com.db.j2
+   dest: /var/named/{{domain}}.db
+   owner: root
+   group: named
+   mode: '0640'
+   backup: yes
+- name: check zone file
+  shell: /usr/sbin/named-checkconf
+  register: checkzoneresult
+- name: check if checkzone ran fine
+  debug: 
+   msg: "checkzone ran fine"
+  when: checkzoneresult.rc == 0
+- name: start dns service
+  service:
+   name: "{{ service }}"
+   state: started
+   enabled: yes
+
