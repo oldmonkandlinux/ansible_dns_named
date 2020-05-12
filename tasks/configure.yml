@@ -23,7 +23,7 @@
    mode: '0640'
    backup: yes
 - name: check zone file
-  shell: /usr/sbin/named-checkconf
+  shell: /usr/sbin/named-checkzone {{ domain }} /var/named/{{domain}}.db
   register: checkzoneresult
 - name: check if checkzone ran fine
   debug: 
